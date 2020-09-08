@@ -1,1 +1,1 @@
-# VP
+# Veebiprogrammeerimise kursuse repositoorium
