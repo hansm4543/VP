@@ -27,7 +27,8 @@
   $today = new Datetime("now");
   $fromsemesterstart = $today->diff($semesterstart);
   $daysfromsemesterstart = $fromsemesterstart->format("%r%a");
-  
+  $tosemesterend = $today->diff($semesterend);
+  $daystosemesterstart = $tosemesterend->format("%r%a");
  
   
   
@@ -66,6 +67,7 @@
   <p>Lehe avamise hetk:<?php echo $fulltimenow; ?>.</p>
   <p><?php echo "Praegu on " .$partofday ."."; ?></p>
   <p><?php echo "Semester " .$semestersituation ."."; ?></p>
+  <p><?php echo "Semesteri lõpuni on " .$daystosemesterstart ." päeva."; ?></p>
   <p>Õppetööst on läbitud:<?php echo $percentage; ?>%.</p>
 </body>
 </html>
