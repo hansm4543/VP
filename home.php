@@ -8,7 +8,16 @@
   } //enne 6
   if($hournow >= 8 and $hournow <= 18){
 	  $partofday = "õppimise aeg";
-  }//peale 8-18, kasutatud kaasaarvatud märki
+  }//peale 8-18, kasutatud suuremvõrdne märki
+  if($hournow > 18 and $hournow <= 20){
+	  $partofday = "trenniaeg";
+  }
+  if($hournow > 6 and $hournow <= 7){
+	  $partofday = "ärkamiseaeg";
+  }
+  if($hournow > 20 and $hournow <= 22){
+	  $partofday = "teleka vaatamise aeg";
+  }
   
   //vaatame semestri kulgemist
   $semesterstart = new DateTime("2020-8-31");
@@ -16,8 +25,28 @@
   $semesterduration = $semesterstart->diff($semesterend);
   $semesterdurationdays = $semesterduration->format("%r%a");
   $today = new Datetime("now");
+  $fromsemesterstart = $semesterstart->diff($today);
+  $daysfromsemesterstart = $fromsemesterstart->format("%r%a");
+  
+  $percentage = ( $semesterdurationdays / $semesterdurationdays ) * 100;
   
   
+  //Nüüd saate IF lausetega vaadata, kas äkki on tänase ja semestri alguse erinevus negatiivne - siis pole ju semester veel peale hakanud.
+  //Kui tänaseks on rohkem päevi, kui semesri pikkus, siis on semester lõpenud. Muudel juhtudel on semester täies hoos.
+  if ($daysfromsemesterstart > 0){
+	   $semestersituation = "pole veel alanud";
+	   $percentage = "0";
+  }
+  if ($daysfromsemesterstart <= 0 and $daysfromsemesterstart <= $semesterdurationdays){
+	   $semestersituation = "on täies hoos ja õppetööst on läbitud";
+  }
+  if ($daysfromsemesterstart > $semesterdurationdays){
+	   $semestersituation = "on lõppenud";
+	   $percentage = "100";
+  }
+  //Lisaks andke teada, mitu % on semestri õppetööst tehtud (kui pole semester veel alanud, siis on 0% ja kui semester läbi saab, siis 100%, mitte rohkem).
+ 
+ 
   
 ?>
 
@@ -35,5 +64,7 @@
   <p style="background-color:DodgerBlue;"> KODUS KIRJUTATUD TEXT :P</p>
   <p>Lehe avamise hetk:<?php echo $fulltimenow; ?>.</p>
   <p><?php echo "Praegu on " .$partofday ."."; ?></p>
+  <p><?php echo "Semester " .$semestersituation ."."; ?></p>
+  <p>Õppetööst on läbitud:<?php echo $percentage; ?>%.</p>
 </body>
 </html>
