@@ -25,10 +25,10 @@
   $semesterduration = $semesterstart->diff($semesterend);
   $semesterdurationdays = $semesterduration->format("%r%a");
   $today = new Datetime("now");
-  $fromsemesterstart = $semesterstart->diff($today);
+  $fromsemesterstart = $today->diff($semesterstart);
   $daysfromsemesterstart = $fromsemesterstart->format("%r%a");
   
-  $percentage = ( $semesterdurationdays / $semesterdurationdays ) * 100;
+ 
   
   
   //Nüüd saate IF lausetega vaadata, kas äkki on tänase ja semestri alguse erinevus negatiivne - siis pole ju semester veel peale hakanud.
@@ -38,7 +38,8 @@
 	   $percentage = "0";
   }
   if ($daysfromsemesterstart <= 0 and $daysfromsemesterstart <= $semesterdurationdays){
-	   $semestersituation = "on täies hoos ja õppetööst on läbitud";
+	   $semestersituation = "on täies hoos";
+	   $percentage = abs(( $daysfromsemesterstart / $semesterdurationdays ) *100);
   }
   if ($daysfromsemesterstart > $semesterdurationdays){
 	   $semestersituation = "on lõppenud";
