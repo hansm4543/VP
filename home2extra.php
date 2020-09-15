@@ -72,7 +72,7 @@
 
 </head>
 <body style="background-color:Tomato;">
-  <img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
+  <img src="img/vp_banner.png">
   <h1><?php echo $username; ?></h1>
   <p>See veebileht on loodud õppetöö käigus</p>
   <p>See konkreetne leht on loodud veebiprogrameerimise kursusel aastal 2020 sügissemestril <a href="https://www.tlu.ee"> Tallinna Ülikooli  </a> Digitehnoloogiate instituudis</p>
