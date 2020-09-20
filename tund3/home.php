@@ -37,6 +37,9 @@
 
   $username = "Hansm4543";
   $fulltimenow = date("d.m.Y H:i:s");
+  $daynow = date("d");
+  $yearnow = date("Y");
+  $clocknow = date("H:i:s");
   $hournow = date("H");
   $partofday ="lihtsalt aeg";
   
@@ -46,6 +49,7 @@
  // echo weekdaynameset;
  //var_dump($weekdaynameset)
   $weekdaynow = date("N");
+  $monthnow = date ("m");
  // echo $weekdaynow; prindib 0,1,2 jne tuleb lahutada üks
   
   
@@ -117,20 +121,26 @@
 	  }
   }
   
+  //rand(0, 3)
   
   
   //paneme kõik pildid ekraanile
   
   $piccount = count($picfiles);
+  $picnum = mt_rand(0, ($piccount - 1));
   // $i = $i + 1;
   // $i ++;
   // $i += 2;
   $imghtml = "";
   
-  for($i = 0; $i < $piccount; $i ++){
-	$imghtml .= '<img src="../vp_pics/' .$picfiles[$i] .'" ';
-	$imghtml .= 'alt="Tallinna Ülikool">';
-  }
+   // for($i = 0; $i < $piccount; $i ++){
+	// $imghtml .= '<img src="../vp_pics/' .$picfiles[$i] .'" ';
+	// $imghtml .= 'alt="Tallinna Ülikool">';
+  // }
+  
+  $imghtml .= '<img src="../vp_pics/' .$picfiles[$picnum] .'" ';
+  $imghtml .= 'alt="Tallinna Ülikool">';
+	
   require("header.php");
 ?>
 
@@ -138,21 +148,14 @@
   <h1><?php echo $username; ?></h1>
   <p>See veebileht on loodud õppetöö käigus</p>
   <p>See konkreetne leht on loodud veebiprogrameerimise kursusel aastal 2020 sügissemestril <a href="https://www.tlu.ee"> Tallinna Ülikooli  </a> Digitehnoloogiate instituudis</p>
-  <p style="background-color:DodgerBlue;"> KODUS KIRJUTATUD TEXT :P</p>
-  <p>Lehe avamise hetk: <?php echo $weekdaynameset[$weekdaynow -1].", " .$fulltimenow; ?>.</p>
+  <p style="background-color:DodgerBlue;"> OLEN LAHE SININE RIBA</p>
+  <p>Lehe avamise hetk: <?php echo $weekdaynameset[$weekdaynow -1].", " .$daynow .". " .$monthnameset[$monthnow -1] ." " .$yearnow .", kell " .$clocknow; ?>.</p>
   <p><?php echo "Praegu on " .$partofday ."."; ?></p>
   <p><?php echo $semesterinfo; ?></p>
+  <p>Vajuta sõnale <a href="sisestamine.php">sisestamine</a>, et sisestada mõtteid.</p>
+  <p>Vajuta sõnale <a href="motted.php">mõtted</a>, et lugeda mõtteid.</p>
   <hr>
   <?php echo $imghtml; ?>
-  <hr>
-  <form method="POST">
-    <label>Sisesta oma pähe tulnud mõte! </label>
-    <input type ="text" name="ideainput" placeholder="Kirjuta siia mõte!">
-	<input type="submit" name="ideasubmit" value="Saada mõte ära!">
-  
-  </form>
-  <hr>
-  <?php echo $ideahtml; ?>
   
 </body>
 </html>
