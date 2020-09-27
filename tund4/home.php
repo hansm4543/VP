@@ -150,6 +150,7 @@
 	<li><a href="sisestamine.php">Mõttete sisestamine</a></li>
 	<li><a href="listfilm.php">Filmid</a></li>
 	<li><a href="addfilms.php">Filmide lisamine</a></li>
+	<li><a href="account.php">Kasutajate lisamine</a></li>
   </ul>
 
 
