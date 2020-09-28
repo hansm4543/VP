@@ -69,6 +69,12 @@
 	  }
 		  
 	  
+	  /*<label for="gendermale">Mees</label>
+	<input type="radio" name="genderinput" id="gendermale" value="1" <?php if($gender == "1"){echo " checked";}?>>
+	<span><?php echo $gendererror; ?></span>
+	<br>
+	<label for="genderfemale">Naine</label>
+	<input type="radio" name="genderinput" id="genderfemale" value="2" <?php if($gender == "2"){echo " checked";}?>> */
 	  
 	  
 	 /* if(empty ($firstnameerror) and empty ($lastnameerror) and empty ($gendererror) and empty ($passworderror) and empty ($passwordsecondaryerror) and empty ($passwordshorterror)and empty ($passwordnotmatcherror)){
@@ -100,12 +106,8 @@
 	<input type="text" name="lastnameinput" id="lastnameinput" placeholder="Perekonnanimi" value="<?php echo $lastname; ?>">
 	<span><?php echo $lastnameerror; ?></span>
 	<br>
-	<label for="gendermale">Mees</label>
-	<input type="radio" name="genderinput" id="gendermale" value="1" <?php if($gender == "1"){echo " checked";}?>>
-	<span><?php echo $gendererror; ?></span>
-	<br>
-	<label for="genderfemale">Naine</label>
-	<input type="radio" name="genderinput" id="genderfemale" value="2" <?php if($gender == "2"){echo " checked";}?>>
+	<label for="genderinput">Sugu</label>
+	<input type="radio" name="genderinput" id="gendermale" value="1" <?php if($gender == "1"){echo " checked";}?>><label for="gendermale">Mees</label><input type="radio" name="genderinput" id="genderfemale" value="2" <?php if($gender == "2"){echo " checked";}?>><label for="genderfemale">Naine</label>
 	<span><?php echo $gendererror; ?></span>
 	<br>
 	<label for="emailinput">Email</label> 
