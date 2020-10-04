@@ -8,7 +8,7 @@
   $monthnameset = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni", "juuli", "august", "september", "oktoober", "november", "detsember"];
   
   
-  $username = "Hansm4543";
+  $username = "";
   
   //errorid
   $firstnameerror = "";
@@ -124,7 +124,7 @@
 		  $gender .= intval($_POST["genderinput"]);
 	  }
 		  
-	  if(empty ($firstnameerror) and empty ($lastnameerror) and empty ($gendererror) and empty ($birthdayerror) and empty ($birthmontherror) and empty ($birthyearerror) and empty ($birthdateerror) and empty ($passworderror) and empty ($passwordsecondaryerror) and empty ($passwordshorterror)and empty ($passwordnotmatcherror)){
+	  if(empty ($firstnameerror) and empty ($lastnameerror) and empty ($gendererror) and empty ($birthdayerror) and empty ($birthmontherror) and empty ($birthyearerror) and empty ($birthdateerror) and empty ($emailerror) and empty ($passworderror) and empty ($passwordsecondaryerror) and empty ($passwordshorterror)and empty ($passwordnotmatcherror)){
 		$result = signup($firstname, $lastname, $email, $gender, $birthdate, $_POST["passwordinput"]);
 	  
 		//$notice = "Kõik korras!";
@@ -162,7 +162,7 @@
   <p>See konkreetne leht on loodud veebiprogrammeerimise kursusel aasta 2020 sügissemestril <a href="https://www.tlu.ee">Tallinna Ülikooli</a> Digitehnoloogiate instituudis.</p>
   
   <ul>
-    <li><a href="home.php">Avaleht</a></li>
+    <li><a href="page.php">Algleht</a></li>
   </ul>
   
   <hr>
@@ -234,7 +234,7 @@
 	
 	<label for="emailinput">Email:</label> 
 	<input type="email" name="emailinput" id="emailinput" placeholder="Email" value="<?php echo $email; ?>">
-	<span><?php echo $firstnameerror; ?></span>
+	<span><?php echo $emailerror; ?></span>
 	<br>
 	<label for="passwordinput">Parool(min 8 märki):</label> 
 	<input type="password" name="passwordinput" id="passwordinput" placeholder="Parool">

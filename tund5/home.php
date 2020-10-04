@@ -145,12 +145,11 @@
 ?>
 
   <ul>
-    <li><a href="home.php">Avaleht</a></li>
+    <li><a href="page.php">Algleht</a></li>
 	<li><a href="motted.php">Mõtted</a></li>
 	<li><a href="sisestamine.php">Mõttete sisestamine</a></li>
 	<li><a href="listfilm.php">Filmid</a></li>
 	<li><a href="addfilms.php">Filmide lisamine</a></li>
-	<li><a href="account.php">Kasutajate lisamine</a></li>
   </ul>
 
 
@@ -162,8 +161,6 @@
   <p>Lehe avamise hetk: <?php echo $weekdaynameset[$weekdaynow -1].", " .$daynow .". " .$monthnameset[$monthnow -1] ." " .$yearnow .", kell " .$clocknow; ?>.</p>
   <p><?php echo "Praegu on " .$partofday ."."; ?></p>
   <p><?php echo $semesterinfo; ?></p>
-  <p>Vajuta sõnale <a href="sisestamine.php">sisestamine</a>, et sisestada mõtteid.</p>
-  <p>Vajuta sõnale <a href="motted.php">mõtted</a>, et lugeda mõtteid.</p>
   <hr>
   <?php echo $imghtml; ?>
   
