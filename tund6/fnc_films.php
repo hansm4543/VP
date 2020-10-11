@@ -46,5 +46,77 @@
 	  $stmt->close();
 	  $conn->close();
   }//SAvefilm info lõppeb
+  
+  
+  function readgenre(){
+	$notice = null;
+	$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+	//$stmt = $conn->prepare("SELECT pealkiri, aasta, kestus, tootja, lavastaja FROM film");
+	$stmt = $conn->prepare("SELECT genre_id, genre_name FROM genre");
+	echo $conn->error;
+	//seome tulemuse muutujaga
+	$stmt->bind_result($genreidfromdb, $genrefromdb);
+	$stmt->execute();
+	$filmgenredropdown = "\t <ol> \n";
+	while($stmt->fetch()){
+	  $filmgenredropdown .= "\n \t \t" .'<option value="' .$genreidfromdb .'">' .$genrefromdb .'</option>';
+	  $filmgenredropdown .= "\t \t \t </ul> \n";
+	  $filmgenredropdown .= "\t \t </li> \n";
+	}
+	$filmgenredropdown .= "\t </ol> \n";
+	$stmt->close();
+	$conn->close();
+	return $filmgenredropdown;
+  }
+  
+    function readfilmtitle(){
+	$notice = null;
+	$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+	//$stmt = $conn->prepare("SELECT pealkiri, aasta, kestus, tootja, lavastaja FROM film");
+	$stmt = $conn->prepare("SELECT movie_id, title FROM movie");
+	echo $conn->error;
+	//seome tulemuse muutujaga
+	$stmt->bind_result($movieidfromdb, $titlefromdb);
+	$stmt->execute();
+	$filmtitledropdown = "\t <ol> \n";
+	while($stmt->fetch()){
+	  $filmtitledropdown .= "\n \t \t" .'<option value="' .$movieidfromdb .'">' .$titlefromdb .'</option>';
+	  $filmtitledropdown .= "\t \t \t </ul> \n";
+	  $filmtitledropdown .= "\t \t </li> \n";
+	}
+	$filmtitledropdown .= "\t </ol> \n";
+	$stmt->close();
+	$conn->close();
+	return $filmtitledropdown;
+  }
+  
+/*
+  
+  function titlegenreconnection($description, $bgcolor, $txtcolor){
+	
+	$notice = null;
+	$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+	$stmt = $conn->prepare("SELECT movie_genre_id, movie_id, genre_id FROM movie_genre WHERE movie_genre_id = ?");
+	echo $conn->error;
+	$stmt->bind_param("i", $_SESSION["userid"]);
+	$stmt->execute();
+	if($stmt->fetch()){
+		$stmt->close();
+		//uuendame profiili
+		$stmt= $conn->prepare("UPDATE vpuserprofiles SET description = ?, bgcolor = ?, txtcolor = ? WHERE userid = ?");
+		echo $conn->error;
+		$stmt->bind_param("sssi", $description, $bgcolor, $txtcolor, $_SESSION["userid"]);
+  
+	}
+   }
+ 
+  */
+  
+  
+  
+  
+  
+  
+  
 
 ?>

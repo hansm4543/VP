@@ -166,6 +166,7 @@
 	<li><a href="listfilm.php">Filmid</a></li>
 	<li><a href="addfilms.php">Filmide lisamine</a></li>
 	<li><a href="userprofile.php">Minu kasutaja profiil</a></li>
+	<li><a href="filmconnection.php">Filmide ühendamine</a></li>
   </ul>
 
   
