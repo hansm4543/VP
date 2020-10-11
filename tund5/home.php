@@ -144,14 +144,6 @@
   require("header.php");
 ?>
 
-  <ul>
-    <li><a href="page.php">Algleht</a></li>
-	<li><a href="motted.php">Mõtted</a></li>
-	<li><a href="sisestamine.php">Mõttete sisestamine</a></li>
-	<li><a href="listfilm.php">Filmid</a></li>
-	<li><a href="addfilms.php">Filmide lisamine</a></li>
-  </ul>
-
 
   <img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
   <h1><?php echo $username; ?></h1>
@@ -161,6 +153,16 @@
   <p>Lehe avamise hetk: <?php echo $weekdaynameset[$weekdaynow -1].", " .$daynow .". " .$monthnameset[$monthnow -1] ." " .$yearnow .", kell " .$clocknow; ?>.</p>
   <p><?php echo "Praegu on " .$partofday ."."; ?></p>
   <p><?php echo $semesterinfo; ?></p>
+  
+    <ul>
+    <li><a href="page.php">Algleht</a></li>
+	<li><a href="motted.php">Mõtted</a></li>
+	<li><a href="sisestamine.php">Mõttete sisestamine</a></li>
+	<li><a href="listfilm.php">Filmid</a></li>
+	<li><a href="addfilms.php">Filmide lisamine</a></li>
+  </ul>
+
+  
   <hr>
   <?php echo $imghtml; ?>
   
