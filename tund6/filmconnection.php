@@ -3,6 +3,9 @@
   require("../../../config.php");
   require("fnc_films.php");
   
+  
+  $genre = "";
+  $film = "";
   $notice = "";
   $genreerror = "";
   $filmerror = "";
@@ -24,16 +27,9 @@
 	  }
 		  
 	  if(empty ($filmerror) and empty ($genreerror)){
-		  $result = connectfilmgenre();
+		  $notice = titlegenreconnection($filmtitledropdown, $filmgenredropdown);
 	  
-		//$notice = "Kõik korras!";
-		if($result == "ok"){
-			$notice = "Kõik korras, ühendus loodud!";
-			$genre = "";
-			$film = "";
-		} else {
-			$notice = "Tekkis tehniline tõrge: " .$result;
-		}
+
 	  }
 	}
   
@@ -86,6 +82,8 @@
 	
   </form>
   <p><?php echo $notice; ?></p>
+  <p><?php echo $film; ?></p>
+  <p><?php echo $genre; ?></p>
 
 </body>
 </html>

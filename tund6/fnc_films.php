@@ -1,6 +1,7 @@
 <?php
 
   $database = "if20_hans_li_1";
+  //$database = "if20_inga_filmibaas_E";
 
     //var_dump($GLOBALS);
 
@@ -109,9 +110,25 @@
   
 	}
    }
- 
+    
   */
-  
+   
+  function titlegenreconnection($filmtitledropdown, $filmgenredropdown){
+	  $notice = "";
+	  $conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+	  $stmt = $conn->prepare("INSERT INTO movie_genre (movie_id, genre_id) VALUES (?,?)");
+	  echo $conn->error;
+	  $stmt->bind_param("ii", $filmtitledropdown, $filmgenredropdown);
+	  if($stmt->execute()){
+			$notice = "Uus seos edukalt salvestatud!";
+	  } else {
+		  $notice = "Seose salvestamisel tekkis tehniline tõrge: " .$stmt->error;
+		}
+	  $stmt->close();
+	  $conn->close();
+	  return $notice;
+ 
+  }
   
   
   
