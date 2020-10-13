@@ -27,7 +27,7 @@
 	  }
 		  
 	  if(empty ($filmerror) and empty ($genreerror)){
-		  $notice = titlegenreconnection($filmtitledropdown, $filmgenredropdown);
+		  $notice = titlegenreconnection($film, $genre);
 	  
 
 	  }

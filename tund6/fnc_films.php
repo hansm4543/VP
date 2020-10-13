@@ -113,12 +113,12 @@
     
   */
    
-  function titlegenreconnection($filmtitledropdown, $filmgenredropdown){
+  function titlegenreconnection($film, $genre){
 	  $notice = "";
 	  $conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 	  $stmt = $conn->prepare("INSERT INTO movie_genre (movie_id, genre_id) VALUES (?,?)");
 	  echo $conn->error;
-	  $stmt->bind_param("ii", $filmtitledropdown, $filmgenredropdown);
+	  $stmt->bind_param("ii", $film, $genre);
 	  if($stmt->execute()){
 			$notice = "Uus seos edukalt salvestatud!";
 	  } else {
