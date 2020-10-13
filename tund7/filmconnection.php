@@ -47,6 +47,7 @@
   <p>See veebileht on loodud õppetöö käigus</p>
   <p>See konkreetne leht on loodud veebiprogrameerimise kursusel aastal 2020 sügissemestril <a href="https://www.tlu.ee"> Tallinna Ülikooli  </a> Digitehnoloogiate instituudis</p>
   <hr>
+  <p>Töötab tund6 all</p>
 
   <ul>
 	<li><a href="?logout=1">Logi välja</a>!</li>

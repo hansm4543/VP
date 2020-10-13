@@ -167,6 +167,8 @@
 	<li><a href="addfilms.php">Filmide lisamine</a></li>
 	<li><a href="userprofile.php">Minu kasutaja profiil</a></li>
 	<li><a href="addfilmrelationgenre.php">Filmide zanri ühendamine</a></li>
+	<li><a href="addfilmrelations.php">Filmide ühendamine</a></li>
+	<li><a href="listfilmpersons.php">Filmide tegelased</a></li>
   </ul>
 
   

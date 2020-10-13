@@ -47,7 +47,9 @@
 	  $conn->close();
   }//SAvefilm info lõppeb
   
-  
+ 
+/*
+ 
   function readgenre(){
 	$notice = null;
 	$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
@@ -90,27 +92,8 @@
 	return $filmtitledropdown;
   }
   
-/*
-  
-  function titlegenreconnection($description, $bgcolor, $txtcolor){
-	
-	$notice = null;
-	$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
-	$stmt = $conn->prepare("SELECT movie_genre_id, movie_id, genre_id FROM movie_genre WHERE movie_genre_id = ?");
-	echo $conn->error;
-	$stmt->bind_param("i", $_SESSION["userid"]);
-	$stmt->execute();
-	if($stmt->fetch()){
-		$stmt->close();
-		//uuendame profiili
-		$stmt= $conn->prepare("UPDATE vpuserprofiles SET description = ?, bgcolor = ?, txtcolor = ? WHERE userid = ?");
-		echo $conn->error;
-		$stmt->bind_param("sssi", $description, $bgcolor, $txtcolor, $_SESSION["userid"]);
-  
-	}
-   }
-    
-  */
+
+
    
   function titlegenreconnection($filmtitledropdown, $filmgenredropdown){
 	  $notice = "";
@@ -129,7 +112,7 @@
  
   }
   
-  
+  */
   
   
   
