@@ -144,6 +144,9 @@ function readpersoninfilmtoselect($selectedpersoninfilm){
 		if(intval($idfromdb) == $selectedpersoninfilm){
 			$roles .=" selected";
 		}
+		/*if($personinfilmfromdb != ""){
+			$roles .= ">" .$personinfilmfromdb ."</option> \n";
+		}*/
 		$roles .= ">" .$personinfilmfromdb ."</option> \n";
 	}
 	if(!empty($roles)){

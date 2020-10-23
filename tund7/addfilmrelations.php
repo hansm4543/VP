@@ -68,10 +68,12 @@
 	}
 	if(!empty($_POST["positioninput"])){
 		$selectedposition = intval($_POST["positioninput"]);
+		if($selectedposition == 1){
+			$selectedrole = ($_POST["roleinput"]);
+		}
 	} else {
 		$personnotice .= " Vali positsioon!";
 	}
-	$selectedrole = ($_POST["roleinput"]);
 
 	if(!empty($selectedfilm) and !empty($selectedperson) and !empty($selectedposition)){
 		$personnotice = storenewpersonrelation($selectedperson, $selectedfilm, $selectedposition, $selectedrole);
