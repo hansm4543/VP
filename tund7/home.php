@@ -169,6 +169,10 @@
 	<li><a href="addfilmrelationgenre.php">Filmide zanri ühendamine</a></li>
 	<li><a href="addfilmrelations.php">Filmide ühendamine</a></li>
 	<li><a href="listfilmpersons.php">Filmide tegelased</a></li>
+	<li><a href="listquote.php">Filmide tegelased koos quotega</a></li>
+	<li><a href="punktkaks_jan.php">iseseisevtöö jan osa</a></li>
+	<li><a href="addgenre.php">Filmide zanrite lisamine</a></li>
+	<li><a href="addcompany.php">Filmide companite lisamine</a></li>
   </ul>
 
   
