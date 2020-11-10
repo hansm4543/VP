@@ -198,6 +198,7 @@
 	<li><a href="addgenre.php">Filmide zanrite lisamine</a></li>
 	<li><a href="addcompany.php">Filmide companite lisamine</a></li>
 	<li><a href="photoupload.php">Galeriipiltide üleslaadimine</a></li>
+	<li><a href="photogallery_public.php">Avalike fotode galerii</a></li>
   </ul>
   
   <hr>

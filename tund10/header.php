@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <title>Veebiprogrameerimine</title>
   
+  <?php
+	if(isset($tolink)){
+		echo $tolink;
+	}
+  
+  ?>
+  
+  
   <style>
   <?php
 	echo "body {\n";

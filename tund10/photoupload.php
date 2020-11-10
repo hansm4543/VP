@@ -31,8 +31,6 @@
 	$privacy = intval($_POST["privinput"]);
 	$alttext = test_input($_POST["altinput"]);
 	
-	//võtame classi kasutusele
-	$myphoto = new Photoupload($_FILES["photoinput"], $filetype);
 	
 	//var_dump($_POST);
 	//var_dump($_FILES);
@@ -77,6 +75,8 @@
 	
 	//kui vigu pole ...
 	if(empty($inputerror)){
+		//võtame classi kasutusele
+		$myphoto = new Photoupload($_FILES["photoinput"], $filetype);
 		
 		//teeme pildi väiksemaks
 		$myphoto->resizePhoto($photomaxwidth, $photomaxheight, true);
