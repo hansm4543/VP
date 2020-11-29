@@ -21,6 +21,24 @@
 		return $notice;
 	}
 	
+	
+	function storenewsPhotoData($filename){
+		$picturenotice = null;
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("INSERT INTO vpnewsphotos (filename) VALUES (?)");
+		echo $conn->error;
+		$stmt->bind_param("s", $filename);
+		if($stmt->execute()){
+			$picturenotice = 1;
+		} else {
+			//echo $stmt->error;
+			$picturenotice = 0;
+		}
+		$stmt->close();
+		$conn->close();
+		return $picturenotice;
+	}
+	
 	function readPublicPhotoThumbs($privacy){
 		$photohtml = null;
 		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);

@@ -215,5 +215,10 @@
   
   <?php echo $imghtml; ?>
   
+  <hr>
+  
+  
+  
+  
 </body>
 </html>
