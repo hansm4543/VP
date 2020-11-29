@@ -210,7 +210,7 @@
 		if(empty($result)) {
 			$stmt = $conn->prepare("INSERT INTO vpnews (userid, title, content, expire) VALUES (?, ?, ?, ?)");
 			echo $conn->error;
-			$stmt->bind_param("isss", $_SESSION["userid"], $newstitle, $news, $$birthdate);
+			$stmt->bind_param("isss", $_SESSION["userid"], $newstitle, $news, $birthdate);
 			if($stmt->execute()){
 				$notice = "Uudis on salvestatud!";
 			} else {
@@ -227,7 +227,7 @@
 			
 			$stmt = $conn->prepare("INSERT INTO vpnews (userid, title, content, expire, vpnewsphotos_id) VALUES (?, ?, ?, ?, ?)");
 			echo $conn->error;
-			$stmt->bind_param("isssi", $_SESSION["userid"], $newstitle, $news, $$birthdate, $idfromdb);
+			$stmt->bind_param("isssi", $_SESSION["userid"], $newstitle, $news, $birthdate, $idfromdb);
 			if($stmt->execute()){
 				$notice = "Uudis on salvestatud!";
 			} else {

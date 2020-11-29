@@ -170,6 +170,42 @@
       }
 	  
    }
+   
+   
+   //uudise lugemine
+   $newshtml = "";
+   
+	$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], "if20_hans_li_1");
+	$stmt = $conn->prepare("SELECT title, content, firstname, lastname, added, expire, filename FROM vpnews JOIN vpusers ON vpusers.vpusers_id = vpnews.userid LEFT JOIN vpnewsphotos ON vpnews.vpnewsphotos_id = vpnewsphotos.vpnewsphotos_id WHERE expire IS NULL OR expire > CURDATE() ORDER BY vpnews_id DESC LIMIT 5");
+	echo $conn->error;
+	$stmt->bind_result($newstitlefromdb, $newscontentfromdb, $authorfirstnamefromdb, $authorlastnamefromdb, $uploaddate, $expiredate, $filename);
+	$stmt->execute();
+	while($stmt->fetch()) {
+		if($expiredate == null and $filename != null) {
+			$newshtml .= "\t" ."<h3>" .$newstitlefromdb ."</h3> \n \t" ."<p>Autor: <strong>" .$authorfirstnamefromdb ." " .$authorlastnamefromdb ."</strong></p>" ."\n \t" ."<p>Lisatud: <strong>" .$uploaddate ."</strong></p>" ."\n \t" .'<img src="../photoupload_normal/' .$filename .'">' ."\n \t" .htmlspecialchars_decode($newscontentfromdb) ."\n";
+		} elseif($expiredate == null and $filename == null) {
+			$newshtml .= "\t" ."<h3>" .$newstitlefromdb ."</h3> \n \t" ."<p>Autor: <strong>" .$authorfirstnamefromdb ." " .$authorlastnamefromdb ."</strong></p>" ."\n \t" ."Lisatud: <strong>" .$uploaddate ."</strong>" ."\n \t" .htmlspecialchars_decode($newscontentfromdb) ."\n";
+		} elseif($expiredate != null and $filename == null) {
+			$newshtml .= "\t" ."<h3>" .$newstitlefromdb ."</h3> \n \t" ."<p>Autor: <strong>" .$authorfirstnamefromdb ." " .$authorlastnamefromdb ."</strong></p>" ."\n \t" ."<p>Lisatud: <strong>" .$uploaddate ."</strong></p>" ."\n \t" ."Aegub: <strong>" .$expiredate ."</strong>" ."\n \t" .htmlspecialchars_decode($newscontentfromdb) ."\n";
+		} elseif($expiredate != null and $filename != null) {
+			$newshtml .= "\t" ."<h3>" .$newstitlefromdb ."</h3> \n \t" ."<p>Autor: <strong>" .$authorfirstnamefromdb ." " .$authorlastnamefromdb ."</strong></p>" ."\n \t" ."<p>Lisatud: <strong>" .$uploaddate ."</strong></p>" ."\n \t" ."<p>Aegub: <strong>" .$expiredate ."</strong></p>" ."\n \t" .'<img src="../photoupload_normal/' .$filename .'">' ."\n \t" .htmlspecialchars_decode($newscontentfromdb) ."\n";
+		}
+	}
+	if(!empty($newshtml)) {
+		$newshtml = "<div> \n" .$newshtml ."\n  </div> \n";
+	} else {
+		$newshtml = "<p>Kahjuks uudiseid ei leitud!</p> \n";
+	}
+	$stmt->close();
+	$conn->close();
+
+   
+   
+   
+   
+   
+   
+   
 	
 /* $password $_POST["passwordinput"]
 */	
@@ -216,7 +252,8 @@
   <?php echo $imghtml; ?>
   
   <hr>
-  
+
+  <?php echo $newshtml; ?>
   
   
   
