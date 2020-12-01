@@ -224,6 +224,7 @@
 	<li><a href="photoupload.php">Galeriipiltide üleslaadimine</a></li>
 	<li><a href="photogallery_public.php">Avalike fotode galerii</a></li>
 	<li><a href="addnews.php">Uudiste lisamine</a></li>
+	<li><a href="muudanews.php">Uudiste muutmine</a></li>
   </ul>
   
   <hr>
