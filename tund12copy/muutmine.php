@@ -66,8 +66,175 @@
   $notice = null;
   $news = null;
   $newstitle = null;
+  
+  //kui klikiti submit, siis ...
+  if(isset($_POST["newssubmit"])){
+	if(strlen($_POST["newstitleinput"])==0){
+		$inputerror = "Uudise pealkiri on puudu! ";
+	}else{
+		$newstitle = test_input($_POST["newstitleinput"]);
+	}
+	if(strlen($_POST["newsinput"])==0){
+		$inputerror .= " Uudise sisu on puudu! ";
+	}else{
+		$news = test_input($_POST["newsinput"]);
+		//htmlspecialchars teisendab html noolsulud.
+		//nende tagasisaamiseks htmlspecialchars_decode(uudis)
+	
+	if(!empty($_POST["birthdayinput"])){
+		$birthday = intval($_POST["birthdayinput"]);
+	} else {
+		$birthdayerror = "Palun vali kuupäev!";
+	}
+	if(!empty($_POST["birthmonthinput"])){
+		$birthmonth = intval($_POST["birthmonthinput"]);
+	} else{
+		$birthmontherror = "Palun vali kuu!";
+	}
+	if(!empty($_POST["birthyearinput"])){
+		$birthyear = intval($_POST["birthyearinput"]);
+	} else{
+		$birthyearerror = "Palun vali aasta!";
+	}
+	  
+	//kontrollime kuupäeva kehtivust
+	if(!empty($birthday) and !empty($birthmonth) and !empty($birthyear)){
+		if(checkdate($birthmonth, $birthday, $birthyear)){
+			$tempdate = new DateTime($birthyear ."-" .$birthmonth ."-" .$birthday);
+			$birthdate = $tempdate->format("Y-m-d");
+		} else {
+			$birthdateerror = "Kuupäev ei ole reaalne";
+		}
+	}
+	  
+	  
+		
+	}
+	
+	//PILDI LAADIMINE
+	if(!empty($_FILES["photoinput"]["name"]) and !empty($_FILES["photoinput"]["type"]) and !empty($_FILES["photoinput"]["size"])) {
+		$check = getimagesize($_FILES["photoinput"]["tmp_name"]);
+		if($check !== false){
+			//var_dump($check);
+			if($check["mime"] == "image/jpeg"){
+				$filetype = "jpg";
+			}
+			if($check["mime"] == "image/png"){
+				$filetype = "png";
+			}
+			if($check["mime"] == "image/gif"){
+				$filetype = "gif";
+			}
+		} else {
+			$pictureerror = "Valitud fail ei ole pilt! ";
+		}
+
+		if(empty($pictureerror) and $_FILES["photoinput"]["size"] > $filesizelimit){
+			$pictureerror = "Liiga suur fail!";
+		}
+
+		
+		//loome uue failinime
+		$timestamp = microtime(1) * 10000;
+		$filename = $filenameprefix .$timestamp ."." .$filetype;
+		
+		//ega fail äkki olemas pole
+		if(file_exists($photouploaddir_orig .$filename)){
+			$pictureerror .= " Selle nimega fail on juba olemas!";
+		}
+		
+		//kui vigu pole ...
+		if(empty($pictureerror)){
+			//võtame classi kasutusele
+			$myphoto = new Photoupload($_FILES["photoinput"], $filetype);
+			
+			//teeme pildi väiksemaks
+			$myphoto->resizePhoto($photomaxwidth, $photomaxheight, true);
+			//lisame vesimärgi
+			$myphoto->addWatermark($watermark);
+			
+			//salvestame vähendatud pildi
+			
+			$result = $myphoto->saveimage($photouploaddir_normal .$filename);
+				if($result == 1){
+					$picturenotice .= "Vähendatud pildi salvestamine õnnestus!";
+				} else {
+					$pictureerror .= "Vähendatud pildi salvestamisel tekkis tõrge!";
+				}
+			
+			
+			//salvestame originaalpildi
+			$myphoto->moveorigimage($pictureerror, $filename, $photouploaddir_orig);
+			
+			//eemaldan klassi
+			unset($myphoto);
+			
+			if(empty($pictureerror)){
+				$result = storenewsPhotoData($filename);
+				if($result == 1){
+					$picturenotice .= " Pildi info lisati andmebaasi!";
+				} else {
+					$pictureerror .= "Pildi info andmebaasi salvestamisel tekkis tõrge!";
+				}
+			} else {
+				$pictureerror .= " Tekkinud vigade tõttu pildi andmeid ei salvestatud!";
+			}
+			
+		}
+	}
+
+	
+	if(empty($inputerror) and empty($birthdateerror) and empty($birthyearerror) and empty ($birthmontherror) and empty($birthdateerror) and empty($pictureerror)) {
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], "if20_hans_li_1");
+		if(empty($result)) {
+			$notice = null;
+			$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+			$stmt= $conn->prepare("UPDATE vpnews SET title = ?, content = ?, expire = ? WHERE vpnews_id = ?");
+			echo $conn->error;
+			$stmt->bind_param("sss", $newstitle, $news, $birthdate);
+			if($stmt->execute()){
+				$notice .= "Uuendus edukalt salvestatud";
+			} else {
+				$notice .= "Uuenduse salvestamisel tekkis viga: " .$stmt->error;
+			}
+			$stmt->close();
+			$conn->close();
+			
+
+		} else {
+			$stmt = $conn->prepare("SELECT MAX(vpnewsphotos_id) FROM vpnewsphotos");
+			echo $conn->error;
+			$stmt->bind_result($idfromdb);
+			$stmt->execute();
+			$stmt->fetch();
+			$stmt->close();
+			
+			$stmt= $conn->prepare("UPDATE vpnews SET title = ?, content = ?, expire = ?, vpnewsphotos_id = ?  WHERE vpnews_id = ?");
+			echo $conn->error;
+			$stmt->bind_param("sssi", $newstitle, $news, $birthdate, $idfromdb);
+			if($stmt->execute()){
+				$notice .= "Uuendus edukalt salvestatud";
+			} else {
+				$notice .= "Uuenduse salvestamisel tekkis viga: " .$stmt->error;
+			}
+			$stmt->close();
+		}
+		$conn->close();
+	}
 	
 	
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
   require("header.php");
 	
 ?>
