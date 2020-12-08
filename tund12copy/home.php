@@ -225,6 +225,8 @@
 	<li><a href="photogallery_public.php">Avalike fotode galerii</a></li>
 	<li><a href="addnews.php">Uudiste lisamine</a></li>
 	<li><a href="muudanews.php">Uudiste muutmine</a></li>
+	<li><a href="viljavedu.php">Viljavedu</a></li>
+	<li><a href="viljavedutabel.php">Viljavedu tabel</a></li>
   </ul>
   
   <hr>
