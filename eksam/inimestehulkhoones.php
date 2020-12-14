@@ -30,8 +30,6 @@
 	  }
 	  if(empty($inimesetyyperror)and empty($sissevaljaerror)){
 		  $notice = "";
-		  echo $inimesetyyp;
-		  echo $sissevalja;
 		  $conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		  $stmt = $conn->prepare("INSERT INTO inimestehulkhoones (type, valjunud) VALUES(?,?)");
 		  echo $conn->error;
@@ -44,18 +42,181 @@
 		  $stmt->close();
 		  $conn->close();
 	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  //LEIAME INIMESI HETKEL HOONES ET KOGUARVU PANNA DATABASESSE
+		$notice = "<p>Inimesi hoones ei leitud!</p> \n";
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(*) FROM inimestehulkhoones WHERE valjunud = 2");
+		echo $conn->error;
+		$stmt->bind_result($inimestearvkoguarv);
+		if($stmt->execute()){
+			$notice = "";
+			} else {
+				$notice .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
+			}
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(*) FROM inimestehulkhoones WHERE valjunud = 1");
+		echo $conn->error;
+		$stmt->bind_result($inimestevaljumisarvfromdb);
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$inimestekoguarvpealetehet = ($inimestearvkoguarv - $inimestevaljumisarvfromdb);
+		if($inimestekoguarvpealetehet < 0){
+			$inimestekoguarvpealetehet = 0;
+		}
+
+
+
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 1 AND valjunud = 2");
+		echo $conn->error;
+		$stmt->bind_result($meesopetajadfromdb);
+		if($stmt->execute()){
+			$notice = "";
+			} else {
+				$notice .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
+			}
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 1 AND valjunud = 1");
+		echo $conn->error;
+		$stmt->bind_result($inimestevaljumisarvfromdb1);
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$inimestekoguarvpealetehet1 = ($meesopetajadfromdb - $inimestevaljumisarvfromdb1);
+		if($inimestekoguarvpealetehet1 < 0){
+			$inimestekoguarvpealetehet1 = 0;
+}
+
+
+
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 2 AND valjunud = 2");
+		echo $conn->error;
+		$stmt->bind_result($naisopetajadfromdb);
+		if($stmt->execute()){
+			$notice = "";
+			} else {
+				$notice .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
+			}
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 2 AND valjunud = 1");
+		echo $conn->error;
+		$stmt->bind_result($inimestevaljumisarvfromdb2);
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$inimestekoguarvpealetehet2 = ($naisopetajadfromdb - $inimestevaljumisarvfromdb2);
+		if($inimestekoguarvpealetehet2 < 0){
+			$inimestekoguarvpealetehet2 = 0;
+		}
+
+
+
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 3 AND valjunud = 2");
+		echo $conn->error;
+		$stmt->bind_result($meesopilasedfromdb);
+		if($stmt->execute()){
+			$notice = "";
+			} else {
+				$notice .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
+			}
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 3 AND valjunud = 1");
+		echo $conn->error;
+		$stmt->bind_result($inimestevaljumisarvfromdb3);
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$inimestekoguarvpealetehet3 = ($meesopilasedfromdb - $inimestevaljumisarvfromdb3);
+		if($inimestekoguarvpealetehet3 < 0){
+			$inimestekoguarvpealetehet3 = 0;
+		}
+
+
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 4 AND valjunud = 2");
+		echo $conn->error;
+		$stmt->bind_result($naisopilasedfromdb);
+		if($stmt->execute()){
+			$notice = "";
+			} else {
+				$notice .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
+			}
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 4 AND valjunud = 1");
+		echo $conn->error;
+		$stmt->bind_result($inimestevaljumisarvfromdb4);
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
+		$conn->close();
+		$inimestekoguarvpealetehet4 = ($naisopilasedfromdb - $inimestevaljumisarvfromdb4);
+		if($inimestekoguarvpealetehet3 < 0){
+			$inimestekoguarvpealetehet3 = 0;
+		}
+		 
+		if(empty ($notice)){
+			$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+			$stmt = $conn->prepare("INSERT INTO inimesikorragahoones (inimesikokku, meesopetajad, naisopetajad, meesopilased, naisopilased) VALUES(?,?,?,?,?)");
+			echo $conn->error;
+			$stmt->bind_param("iiiii", $inimestekoguarvpealetehet, $inimestekoguarvpealetehet1, $inimestekoguarvpealetehet2, $inimestekoguarvpealetehet3, $inimestekoguarvpealetehet4);
+			if($stmt->execute()){
+				$notice = "Hoones viibijate arv lisati andmebaasi!";
+			} else {
+				$notice = "Hoones viibijate hulga salvestamisel tekkis tehniline tõrge: " .$stmt->error;
+			}
+			$stmt->close();
+			$conn->close();
+			
+		}
+
  }
+ 
+ 
+
+ 
+ 
+ 
  
  
  
  
  
  ?>
- <img src="../img/vp_banner.png" alt="Veebiprogrammeerimise kursuse bänner">
+
    <ul>
     <li><a href="inimestehulktabel.php">Hetkel hoones!</a></li>
   </ul>
- 
+ <h1>Hans-Märten Liiu</h1> 
  <h1>Inimeste sisenemine ja väljumine hoonest</h1>   
 
  <hr>

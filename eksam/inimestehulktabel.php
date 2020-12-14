@@ -25,13 +25,27 @@ if($stmt->execute()){
 		$notice .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
 	}
 if($stmt->fetch()){
-	$notice = "inimene hoones";
+	$notice = "inimest hoones";
 }else{
 	$notice .= "Inimesi hoones ei leitud!";
 }
-
 $stmt->close();
 $conn->close();
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT COUNT(*) FROM inimestehulkhoones WHERE valjunud = 1");
+echo $conn->error;
+$stmt->bind_result($inimestevaljumisarvfromdb);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+$inimestekoguarvpealetehet = ($inimestearvfromdb - $inimestevaljumisarvfromdb);
+if($inimestekoguarvpealetehet < 0){
+	$inimestekoguarvpealetehet = 0;
+}
+
+
+
 
 $notice1 = "<p>Inimesi hoones ei leitud!</p> \n";
 $conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
@@ -44,13 +58,24 @@ if($stmt->execute()){
 		$notice1 .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
 	}
 if($stmt->fetch()){
-	$notice1 = "inimene hoones";
+	$notice1 = "inimest hoones";
 }else{
 	$notice1 .= "Inimesi hoones ei leitud!";
 }
 $stmt->close();
 $conn->close();
-
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 1 AND valjunud = 1");
+echo $conn->error;
+$stmt->bind_result($inimestevaljumisarvfromdb1);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+$inimestekoguarvpealetehet1 = ($inimestearvfromdb1 - $inimestevaljumisarvfromdb1);
+if($inimestekoguarvpealetehet1 < 0){
+	$inimestekoguarvpealetehet1 = 0;
+}
 
 
 $notice2 = "<p>Inimesi hoones ei leitud!</p> \n";
@@ -64,12 +89,24 @@ if($stmt->execute()){
 		$notice2 .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
 	}
 if($stmt->fetch()){
-	$notice2 = "inimene hoones";
+	$notice2 = "inimest hoones";
 }else{
 	$notice2 .= "Inimesi hoones ei leitud!";
 }
 $stmt->close();
 $conn->close();
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 2 AND valjunud = 1");
+echo $conn->error;
+$stmt->bind_result($inimestevaljumisarvfromdb2);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+$inimestekoguarvpealetehet2 = ($inimestearvfromdb2 - $inimestevaljumisarvfromdb2);
+if($inimestekoguarvpealetehet2 < 0){
+	$inimestekoguarvpealetehet2 = 0;
+}
 
 
 
@@ -85,12 +122,24 @@ if($stmt->execute()){
 		$notice3 .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
 	}
 if($stmt->fetch()){
-	$notice3 = "inimene hoones";
+	$notice3 = "inimest hoones";
 }else{
 	$notice3 .= "Inimesi hoones ei leitud!";
 }
 $stmt->close();
 $conn->close();
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 3 AND valjunud = 1");
+echo $conn->error;
+$stmt->bind_result($inimestevaljumisarvfromdb3);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+$inimestekoguarvpealetehet3 = ($inimestearvfromdb3 - $inimestevaljumisarvfromdb3);
+if($inimestekoguarvpealetehet3 < 0){
+	$inimestekoguarvpealetehet3 = 0;
+}
 
 
 $notice4 = "<p>Inimesi hoones ei leitud!</p> \n";
@@ -104,41 +153,137 @@ if($stmt->execute()){
 		$notice4 .= "andmete leidmisel tekkis tehniline tõrge: " .$stmt->error;
 	}
 if($stmt->fetch()){
-	$notice4 = "inimene hoones";
+	$notice4 = "inimest hoones";
 }else{
 	$notice4 .= "Inimesi hoones ei leitud!";
 }
 $stmt->close();
 $conn->close();
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT COUNT(type) FROM inimestehulkhoones WHERE type = 4 AND valjunud = 1");
+echo $conn->error;
+$stmt->bind_result($inimestevaljumisarvfromdb4);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+$inimestekoguarvpealetehet4 = ($inimestearvfromdb4 - $inimestevaljumisarvfromdb4);
+if($inimestekoguarvpealetehet3 < 0){
+	$inimestekoguarvpealetehet3 = 0;
+}
+
+
+
+
+
+
+//leiame kategooriate max arvu
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT MAX(inimesikokku) FROM inimesikorragahoones");
+echo $conn->error;
+$stmt->bind_result($inimestemaxkoguarv);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT MAX(meesopetajad) FROM inimesikorragahoones");
+echo $conn->error;
+$stmt->bind_result($meesopetajatemaxkoguarv);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT MAX(naisopetajad) FROM inimesikorragahoones");
+echo $conn->error;
+$stmt->bind_result($naisopetajatemaxkoguarv);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT MAX(meesopilased) FROM inimesikorragahoones");
+echo $conn->error;
+$stmt->bind_result($meesopilastemaxkoguarv);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+
+$conn = new mysqli($GLOBALS["serverhost"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+$stmt = $conn->prepare("SELECT MAX(naisopilased) FROM inimesikorragahoones");
+echo $conn->error;
+$stmt->bind_result($naisopilastemaxkoguarv);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+
+
+
+
 
 
 ?>
 
 <body>
+ <h1>Hans-Märten Liiu</h1> 
   <ul>
     <li><a href="inimestehulkhoones.php">Inimeste sisenemine ja väljumine hoonesse!</a></li>
   </ul> 
-  
+
+<p>MAX erinevaid inimesi hoones korraga: </p>
+  <?php
+	echo $inimestemaxkoguarv;
+  ?>
+<hr>
+
+<p>MAX mees õppejõudusid korraga hoones: </p>
+  <?php
+	echo $meesopetajatemaxkoguarv;
+  ?>
+<p>MAX nais õppejõudusid korraga hoones: </p>
+  <?php
+	echo $naisopetajatemaxkoguarv;
+  ?>
+<p>MAX mees üliõpilasi korraga hoones:</p>
+  <?php
+	echo $meesopilastemaxkoguarv;
+  ?>
+<p>MAX nais üliõpilasi korraga hoones: </p>
+  <?php
+	echo $naisopilastemaxkoguarv;
+  ?>
+
+
+
+
+
+<hr>
 <p>Kokku inimesi hoones: </p>
   <?php
-	echo $inimestearvfromdb;
+	echo $inimestekoguarvpealetehet;
   ?>
 
   <?php
 	echo $notice;
   ?>  
 <hr>
-<p>Mees õpetajaid hoones: </p>
+<p>Mees õppejõudusid hoones: </p>
   <?php
-	echo $inimestearvfromdb1;
+	echo $inimestekoguarvpealetehet1;
   ?>
 
   <?php
 	echo $notice1;
   ?>
-<p>Nais õpetajaid hoones: </p>
+<p>Nais õppejõudusid hoones: </p>
   <?php
-	echo $inimestearvfromdb2;
+	echo $inimestekoguarvpealetehet2;
   ?>
 
   <?php
@@ -147,15 +292,15 @@ $conn->close();
   
 <p>Mees üliõpilasi hoones: </p>
   <?php
-	echo $inimestearvfromdb3;
+	echo $inimestekoguarvpealetehet3;
   ?>
   <?php
 	echo $notice3;
   ?>
   
-<p>Nais Üliõpilasi hoones: </p>
+<p>Nais üliõpilasi hoones: </p>
   <?php
-	echo $inimestearvfromdb4;
+	echo $inimestekoguarvpealetehet4;
   ?>
 
   <?php
